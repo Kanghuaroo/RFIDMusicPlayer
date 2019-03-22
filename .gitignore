@@ -1,3 +1,4 @@
 ENVSpotipyPlayer
 .cache-lyirk
 PortReader.py
+__pycache__/
