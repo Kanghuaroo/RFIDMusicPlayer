@@ -16,16 +16,17 @@ sp = spotipy.Spotify(auth=token)
 songs = {}
 with open('Cards.txt') as fileObj:
 	for line in fileObj:
-		crd = MusicCard(line, sp);
+		crd = MusicCard(line, sp)
 		songs[crd.getCode()] = crd
 		print(crd.getID())
 
 #Opening Serial Port
 ser = serial.Serial('COM6')
+
 asd = True
 while asd:
 	print('Waiting for Card')
-	x = ser.readline().decode().strip();
+	x = ser.readline().decode().strip()
 	print(x)
 	print(sp.current_playback())
 	if songs.get(x) != None:
@@ -33,14 +34,14 @@ while asd:
 	elif songs.get(x) == None:
 		#fix init
 		newCard= x+', '+sp.current_playback()+', '+sp.current_playback()
-		crd = MusicCard(newCard, sp);
+		crd = MusicCard(newCard, sp)
 		songs[crd.getCode()] = crd
 		crd.store()
-	elif False:
+	elif x==1:
 		sp.next_track()
-	elif False:	
+	elif x==2:	
 		sp.pause_playback()
-	elif False:
+	elif x==3:
 		sp.previous_track()
 	
 	#sp.next_track()
