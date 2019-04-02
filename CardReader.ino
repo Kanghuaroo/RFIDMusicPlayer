@@ -36,6 +36,7 @@ void setup() {
 }
 
 void loop() {
+  byte[] buffer;
    // Look for new cards
   if ( ! rfid.PICC_IsNewCardPresent())
     return;
@@ -48,7 +49,16 @@ void loop() {
   printByte(rfid.uid.uidByte, rfid.uid.size);
   Serial.println();
 
-     // Halt PICC
+  //Read incoming
+  if(Serial.readBytesUntil('\n', buffer, 1024) != 0){  //1024 = size of Card
+   printByte(buffer,1024);
+    Serial.println();
+   
+   //write bytes to chard
+  
+  }
+ 
+ // Halt PICC
   rfid.PICC_HaltA();
 
   // Stop encryption on PCD
